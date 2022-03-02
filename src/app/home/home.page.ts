@@ -3,6 +3,8 @@ import
   {
     ActionPerformed, PushNotifications, PushNotificationSchema, Token
   } from '@capacitor/push-notifications';
+import { FirestoreService } from '../firestore.service';
+import { Tokens } from '../tokens';
 
 
 @Component({
@@ -11,6 +13,11 @@ import
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  token: Tokens;
+  constructor(private firestoreService: FirestoreService) {
+    this.token = {} as Tokens;
+   }
+
   ngOnInit() {
     console.log('Initializing HomePage');
 
@@ -33,7 +40,10 @@ export class HomePage implements OnInit {
 
     PushNotifications.addListener('registration', (token: Token) => {
       console.log(token.value);
-      alert('Push registration success, token: ' + token.value);
+      this.token.token = token.value;
+      this.insertar();
+      // alert('Push registration success, token: ' + token.value);
+      console.log(token.value);
     });
 
     PushNotifications.addListener('registrationError', (error: any) => {
@@ -54,6 +64,15 @@ export class HomePage implements OnInit {
       },
     );
 
+  }
+
+  insertar() {
+    this.firestoreService.insertar('tokens', this.token).then(() => {
+      console.log('Token guardado correctamente!');
+      this.token= {} as Tokens;
+    }, (error) => {
+      console.error(error);
+    });
 
   }
 }
