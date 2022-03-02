@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.pruebapush",
+	"appName": "pushNotif",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

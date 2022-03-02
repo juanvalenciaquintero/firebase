@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">pushNotif</string>
+    <string name="title_activity_main">pushNotif</string>
+    <string name="package_name">io.ionic.pruebapush</string>
+    <string name="custom_url_scheme">io.ionic.pruebapush</string>
+</resources>
